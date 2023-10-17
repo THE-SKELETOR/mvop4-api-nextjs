@@ -5,9 +5,13 @@ type Data = {
   name: string
 }
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<Data | string>,
 ) {
+  const stuff = await fetch('https://ipapi.co/json/')
+  const thing = await stuff.json()
+  console.log(thing)
   res.status(200).json({ name: 'John Doe' })
+  return thing
 }
